@@ -18,18 +18,15 @@ webix.ui({
             autoConfig:true,
             editable:true,
             columns :[
-                {id: "title",    sort:"string", header:[{text: "Title"},  {content:"textFilter"}], fillspace:true},
-                {id: "year",     sort:"string", header:[{text: "Year"},   {content:"textFilter"}]},
-                {id: "category", sort:"string", header:[{text: "Category"},  {content:"textFilter"}], editor:"select", options:["Good","Bad", "Ugly"]},
-                {id: "sub-cat",  sort:"int",    header:[{text: "Sub Category"},   {content:"textFilter"}]},    
-                {id: "rating",   sort:"number", header:[{text: "Rating"}, {content:"textFilter"}]},
-                {id: "rank",     sort:"int",    header:[{text: "Rank"},   {content:"textFilter"}]},  
-                {id: "price",    sort:"int",    header:[{text: "Price"},  {content:"textFilter"}], format:webix.i18n.priceFormat, css: "price"}
-                    
+                {id: "name",      sort:"string", header:[{text: "Customer"},  {content:"textFilter"}], width: 250},
+                {id: "address",   sort:"string", header:[{text: "Address"},   {content:"textFilter"}], fillspace:true, minWidth: 200},
+                {id: "postcode",  sort:"string", header:[{text: "Postcode"},  {content:"textFilter"}], width: 90},
+                {id: "telephone", sort:"string", header:[{text: "Telephone"}, {content:"textFilter"}], width: 120},   
+                {id: "email",     sort:"string", header:[{text: "Email"},     {content:"textFilter"}], width: 200}
             ],
             select: "row",
             navigation:true,
-            url: "/sample/data.json"
+            url: "/test"
         },
         {view:"resizer"}, //!resizer line
         {

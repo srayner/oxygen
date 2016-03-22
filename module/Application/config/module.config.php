@@ -23,6 +23,7 @@ return array(
     // Router config.
     'router' => array(
         'routes' => array(
+            
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -33,13 +34,26 @@ return array(
                     ),
                 ),
             ),
+            
+            'test' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/test',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Test',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            
         ),
     ),
             
     // Controller config.
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Test'  => 'Application\Controller\TestController'
         ),
     ),
     
