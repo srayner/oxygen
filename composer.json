@@ -1,0 +1,15 @@
+{
+    "name": "srayner/oxygen",
+    "description": "Quotation Application using ZF2/Webix",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "quotation",
+        "webix",
+        "zf2"
+    ],
+    "homepage": "http://github.com/srayner/oxygen",
+    "require": {
+        "php": ">=5.6",
+        "zendframework/zendframework": "2.5.0"
+    }
+}
