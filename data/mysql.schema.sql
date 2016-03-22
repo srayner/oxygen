@@ -12,7 +12,7 @@ create table supplier (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 -- Customer
-create table supplier (
+create table customer (
     id        Integer(11)  NOT NULL AUTO_INCREMENT,
     name      NVarChar(64) NOT NULL, 
     address   text         NOT NULL,
@@ -34,7 +34,7 @@ create table product (
     supplier_code NVarChar(64),
     price_list    numeric(10,2)  NOT NULL,
     discount      numeric(4,2)   NOT NULL,
-    group         NVarchar(64),
+    grouping      NVarchar(64),
     PRIMARY KEY (
         id
     )
