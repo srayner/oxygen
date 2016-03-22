@@ -35,6 +35,16 @@ return array(
                 ),
             ),
             
+            'customer' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/api/customers[/:id]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Customer',     
+                    ),
+                ),
+            ),
+            
             'test' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -52,6 +62,7 @@ return array(
     // Controller config.
     'controllers' => array(
         'invokables' => array(
+            'Application\Controller\Customer' => 'Application\Controller\CustomerController',
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Test'  => 'Application\Controller\TestController'
         ),

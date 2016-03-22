@@ -26,7 +26,7 @@ webix.ui({
             ],
             select: "row",
             navigation:true,
-            url: "/test"
+            url: "/api/customers"
         },
         {view:"resizer"}, //!resizer line
         {
