@@ -1,0 +1,30 @@
+<?php
+
+// ******************* Change these to suit your local setup *******************
+$dbParams = array(
+    'database'  => 'oxygen',
+    'username'  => 'username',
+    'password'  => 'password',
+    'hostname'  => 'localhost',
+);
+
+// **************************DO NOT MAKE CHANGES BELOW THIS LINE ***************
+return array (
+    
+    // Doctrine database connection.
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'params' => array(
+                    'host'     => $dbParams['hostname'],
+                    'port'     => '3306',
+                    'user'     => $dbParams['username'],
+                    'password' => $dbParams['password'],
+                    'dbname'   => $dbParams['database'],
+                )
+            )
+        )
+    ),
+
+);
