@@ -2,22 +2,15 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 
-class CustomerController extends AbstractRestfulController
+class CustomerController extends AbstractRestController
 {
     public function getList()
-    {
-        // TODO: move this to a service
-        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $data = $em->getRepository('Application\Entity\Customer')->findAll();
-        
-        // Build the view.
-        $view = new JsonModel();
-        $view->setVariables(array(
-            'data' => $data
+    {  
+        // Grab the data and return a Json view model.
+        return new JsonModel(array(
+            'data' => $this->em->getRepository('Application\Entity\Customer')->findAll()
         ));
-        return $view;
     }
 }

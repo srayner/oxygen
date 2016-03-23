@@ -62,9 +62,11 @@ return array(
     // Controller config.
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Customer' => 'Application\Controller\CustomerController',
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Test'  => 'Application\Controller\TestController'
+        ),
+        'factories' => array(
+            'Application\Controller\Customer' => 'Application\Controller\CustomerControllerFactory',    
         ),
     ),
     
@@ -83,6 +85,9 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
     ),
     
