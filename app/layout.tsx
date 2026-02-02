@@ -15,8 +15,9 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Next Skeleton',
-  description: 'A production-ready Next.js starter skeleton',
+  title: 'Oxygen - Health & Wellbeing Tracker',
+  description:
+    'Track your weight, monitor your progress, and build healthy habits with Oxygen.',
 }
 
 export default function RootLayout({
