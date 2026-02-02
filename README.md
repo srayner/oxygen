@@ -1,6 +1,6 @@
-# Next Skeleton
+# Oxygen
 
-A production-ready Next.js starter skeleton with authentication, role-based authorization, and a professional admin dashboard layout.
+A health and wellbeing application for tracking personal metrics and achieving your wellness goals.
 
 ## Tech Stack
 
@@ -13,10 +13,11 @@ A production-ready Next.js starter skeleton with authentication, role-based auth
 
 ## Features
 
+- Weight tracking with visual charts
+- CSV import for bulk data entry
 - User authentication (login/register)
 - Role-based authorization (user/admin)
-- Protected routes with middleware
-- Collapsible sidebar navigation
+- User preferences and settings
 - Dark/light theme support
 - Responsive design
 
@@ -44,12 +45,13 @@ cp .env.example .env
 Edit `.env` with your database connection string and NextAuth secret:
 
 ```
-DATABASE_URL="postgresql://user:password@localhost:5432/next_skeleton?schema=public"
+DATABASE_URL="postgresql://user:password@localhost:5432/oxygen?schema=public"
 AUTH_URL="http://localhost:3000"
 AUTH_SECRET="your-secret-key-here"
 ```
 
 Generate a secret with:
+
 ```bash
 openssl rand -base64 32
 ```
@@ -77,28 +79,28 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Default Users
 
-| Role  | Email               | Password    |
-|-------|---------------------|-------------|
-| User  | user@example.com    | password123 |
-| Admin | admin@example.com   | admin123    |
+| Role  | Email             | Password    |
+| ----- | ----------------- | ----------- |
+| User  | user@example.com  | password123 |
+| Admin | admin@example.com | admin123    |
 
 ## Available Scripts
 
-| Script          | Description                          |
-|-----------------|--------------------------------------|
-| `npm run dev`   | Start development server             |
-| `npm run build` | Build for production                 |
-| `npm run start` | Start production server              |
-| `npm run lint`  | Run ESLint                           |
-| `npm run format`| Format code with Prettier            |
-| `npm run db:generate` | Generate Prisma client         |
-| `npm run db:migrate`  | Run database migrations        |
-| `npm run db:fixtures` | Reset and seed database        |
+| Script                | Description               |
+| --------------------- | ------------------------- |
+| `npm run dev`         | Start development server  |
+| `npm run build`       | Build for production      |
+| `npm run start`       | Start production server   |
+| `npm run lint`        | Run ESLint                |
+| `npm run format`      | Format code with Prettier |
+| `npm run db:generate` | Generate Prisma client    |
+| `npm run db:migrate`  | Run database migrations   |
+| `npm run db:fixtures` | Reset and seed database   |
 
 ## Project Structure
 
 ```
-next-skeleton/
+oxygen/
 ├── prisma/
 │   ├── schema.prisma          # Database schema
 │   └── fixtures.ts            # Seed script
@@ -107,12 +109,13 @@ next-skeleton/
 │   ├── layout.tsx             # Root layout
 │   ├── page.tsx               # Landing page
 │   ├── (auth)/                # Auth pages (login, register)
-│   ├── (protected)/           # Protected pages (dashboard, settings, admin)
+│   ├── (protected)/           # Protected pages (dashboard, settings, weight)
 │   └── api/                   # API routes
 ├── components/
 │   ├── ui/                    # shadcn/ui components
 │   ├── layout/                # AppShell, Sidebar, TopNav
 │   ├── auth/                  # LoginForm, RegisterForm
+│   ├── weight/                # Weight tracking components
 │   └── providers/             # ThemeProvider, SessionProvider
 ├── lib/
 │   ├── auth.ts                # NextAuth configuration
