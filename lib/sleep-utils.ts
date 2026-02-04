@@ -9,7 +9,7 @@ export function calculateDurationMins(
   const [bedHours, bedMins] = bedtime.split(':').map(Number)
   const [wakeHours, wakeMins] = waketime.split(':').map(Number)
 
-  let bedTotalMins = bedHours * 60 + bedMins
+  const bedTotalMins = bedHours * 60 + bedMins
   let wakeTotalMins = wakeHours * 60 + wakeMins
 
   // If wake time is earlier than bedtime, it's the next day

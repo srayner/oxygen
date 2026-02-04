@@ -29,6 +29,7 @@ model User {
   updatedAt      DateTime     @updatedAt
   weights        Weight[]
   sleeps         Sleep[]
+  moods          Mood[]
   preferences    Preferences?
 
   @@index([roleId])
@@ -66,6 +67,21 @@ model Sleep {
   durationMins Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+model Mood {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date        DateTime @db.Date
+  moodLevel   Int
+  energyLevel Int
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@unique([userId, date])
   @@index([userId])

@@ -10,6 +10,7 @@ import {
   User2,
   Scale,
   Moon,
+  Smile,
 } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 
@@ -50,6 +51,11 @@ const mainNavItems = [
     title: 'Sleep',
     url: '/sleep',
     icon: Moon,
+  },
+  {
+    title: 'Mood',
+    url: '/mood',
+    icon: Smile,
   },
   {
     title: 'Settings',

@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { MoodWidget } from '@/components/dashboard/mood-widget'
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -74,6 +75,8 @@ export default async function DashboardPage() {
               </div>
             </CardContent>
           </Card>
+
+          <MoodWidget />
         </div>
       </div>
     </div>
