@@ -29,12 +29,15 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
+# Next.js standalone output (includes server + JS deps)
 COPY --from=builder /app/.next/standalone ./
+
+# Static assets
 COPY --from=builder /app/.next/static ./.next/static
+
+# Prisma schema + generated client
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/node_modules ./node_modules
 
 USER nextjs
 EXPOSE 3000

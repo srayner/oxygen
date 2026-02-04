@@ -2,7 +2,15 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Settings, Shield, ChevronUp, User2, Scale } from 'lucide-react'
+import {
+  Home,
+  Settings,
+  Shield,
+  ChevronUp,
+  User2,
+  Scale,
+  Moon,
+} from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 
 import {
@@ -37,6 +45,11 @@ const mainNavItems = [
     title: 'Weight',
     url: '/weight',
     icon: Scale,
+  },
+  {
+    title: 'Sleep',
+    url: '/sleep',
+    icon: Moon,
   },
   {
     title: 'Settings',
