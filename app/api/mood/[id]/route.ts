@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { sendEvent } from '@/lib/svix'
 
 export async function DELETE(
   request: Request,
@@ -26,6 +27,12 @@ export async function DELETE(
 
   await prisma.mood.delete({
     where: { id: params.id },
+  })
+
+  sendEvent('mood.log.deleted', {
+    id: mood.id,
+    userId: mood.userId,
+    date: mood.date,
   })
 
   return NextResponse.json({ success: true })

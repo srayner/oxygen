@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { calculateDurationMins } from '@/lib/sleep-utils'
+import { sendEvent } from '@/lib/svix'
 
 export async function GET(request: Request) {
   const session = await auth()
@@ -66,6 +67,8 @@ export async function POST(request: Request) {
       durationMins,
     },
   })
+
+  sendEvent('sleep.log.added', sleep)
 
   return NextResponse.json(sleep)
 }

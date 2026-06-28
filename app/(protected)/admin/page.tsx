@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { PageHeader } from '@/components/layout/page-header'
@@ -9,6 +10,17 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { getOrCreateApp } from '@/lib/svix'
+
+async function checkSvixConnected(): Promise<boolean> {
+  try {
+    await getOrCreateApp()
+    return true
+  } catch {
+    return false
+  }
+}
 
 export default async function AdminPage() {
   const session = await auth()
@@ -16,6 +28,8 @@ export default async function AdminPage() {
   if (session?.user?.role !== 'admin') {
     redirect('/dashboard')
   }
+
+  const svixConnected = await checkSvixConnected()
 
   return (
     <div>
@@ -43,6 +57,12 @@ export default async function AdminPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">API</span>
                   <Badge variant="default">Healthy</Badge>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Webhooks (Svix)</span>
+                  <Badge variant={svixConnected ? 'default' : 'destructive'}>
+                    {svixConnected ? 'Connected' : 'Unavailable'}
+                  </Badge>
                 </div>
               </div>
             </CardContent>
@@ -77,10 +97,15 @@ export default async function AdminPage() {
               <CardDescription>Administrative tools</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Admin actions are not implemented in this skeleton. This page
-                demonstrates role-based access control.
-              </p>
+              <div className="space-y-2">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full justify-start"
+                >
+                  <Link href="/admin/webhooks">Manage Webhooks →</Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>

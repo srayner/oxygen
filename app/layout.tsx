@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
+import '@srayner02/svix-admin/styles.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 
 const geistSans = localFont({

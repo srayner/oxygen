@@ -11,6 +11,7 @@ import {
   Scale,
   Moon,
   Smile,
+  Webhook,
 } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 
@@ -69,6 +70,11 @@ const adminNavItems = [
     title: 'Admin',
     url: '/admin',
     icon: Shield,
+  },
+  {
+    title: 'Webhooks',
+    url: '/admin/webhooks',
+    icon: Webhook,
   },
 ]
 
