@@ -14,6 +14,8 @@ A health and wellbeing application for tracking personal metrics and achieving y
 ## Features
 
 - Weight tracking with visual charts
+- Sleep and mood tracking
+- Daily diary for free-form notes
 - CSV import for bulk data entry
 - User authentication (login/register)
 - Role-based authorization (user/admin)

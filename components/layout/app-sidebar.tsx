@@ -11,6 +11,7 @@ import {
   Scale,
   Moon,
   Smile,
+  NotebookPen,
   Webhook,
 } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
@@ -57,6 +58,11 @@ const mainNavItems = [
     title: 'Mood',
     url: '/mood',
     icon: Smile,
+  },
+  {
+    title: 'Diary',
+    url: '/diary',
+    icon: NotebookPen,
   },
   {
     title: 'Settings',
