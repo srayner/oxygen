@@ -1,45 +1,43 @@
-FROM node:20-alpine AS base
-RUN apk add --no-cache openssl libc6-compat
+# ---- Stage 1: build ----
+# Full dependency set (incl. dev) to generate the Prisma client and build Next.js.
+FROM node:26-alpine AS builder
 
-# Install dependencies only when needed
-FROM base AS deps
-ENV NODE_ENV=development
+RUN apk add --no-cache openssl
 
 WORKDIR /app
-COPY package.json package-lock.json* ./
-COPY prisma ./prisma/
+
+# Dependencies first so this layer is cached until the lockfile changes
+COPY package*.json ./
+COPY prisma ./prisma
 RUN npm ci
 
-# Build the application
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# Everything else (see .dockerignore)
 COPY . .
 
 RUN npx prisma generate
-
 RUN npm run build
 
-# Production image
-FROM base AS runner
-ENV NODE_ENV=production
+# ---- Stage 2: runtime ----
+# next.config.mjs sets output: 'standalone', so .next/standalone already contains
+# the server and only the node_modules it needs (including the Prisma client and
+# query engine). No separate node_modules copy, so dev dependencies never ship.
+FROM node:26-alpine AS runner
+
+# Prisma's query engine needs openssl at runtime
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
-# Next.js standalone output (includes server + JS deps)
-COPY --from=builder /app/.next/standalone ./
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
-# Static assets
-COPY --from=builder /app/.next/static ./.next/static
-
-# Prisma schema + generated client
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 EXPOSE 3000
-ENV PORT=3000
+
 CMD ["node", "server.js"]
