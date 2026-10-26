@@ -5,8 +5,9 @@ import { sendEvent } from '@/lib/svix'
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const session = await auth()
 
   if (!session?.user?.id) {
@@ -14,7 +15,7 @@ export async function DELETE(
   }
 
   const weight = await prisma.weight.findUnique({
-    where: { id: params.id },
+    where: { id },
   })
 
   if (!weight) {
@@ -26,7 +27,7 @@ export async function DELETE(
   }
 
   await prisma.weight.delete({
-    where: { id: params.id },
+    where: { id },
   })
 
   sendEvent('weight.log.deleted', {

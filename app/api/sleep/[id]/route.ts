@@ -5,8 +5,9 @@ import { sendEvent } from '@/lib/svix'
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const session = await auth()
 
   if (!session?.user?.id) {
@@ -14,7 +15,7 @@ export async function DELETE(
   }
 
   const sleep = await prisma.sleep.findUnique({
-    where: { id: params.id },
+    where: { id },
   })
 
   if (!sleep) {
@@ -29,7 +30,7 @@ export async function DELETE(
   }
 
   await prisma.sleep.delete({
-    where: { id: params.id },
+    where: { id },
   })
 
   sendEvent('sleep.log.deleted', {
