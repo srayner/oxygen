@@ -18,4 +18,4 @@ change was tested.
 ## For the deploy
 
 - If the branch added anything under `prisma/migrations/`, say that the deploy must run
-  `npx prisma migrate deploy`.
+  `node node_modules/prisma/build/index.js migrate deploy` (the image has no npx).
