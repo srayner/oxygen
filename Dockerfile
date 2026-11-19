@@ -39,7 +39,7 @@ RUN npx prisma generate
 FROM node:26-alpine AS runner
 
 # Prisma's query/migration engines need openssl at runtime
-RUN apk add --no-cache openssl
+RUN apk upgrade --no-cache && apk add --no-cache openssl
 
 WORKDIR /app
 
